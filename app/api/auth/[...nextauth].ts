@@ -1,23 +1,26 @@
-import NextAuth, { AuthOptions } from 'next-auth';
+import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
-import Credentials from 'next-auth/providers/credentials';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
 import { compare } from 'bcrypt';
 import prismadb from '@/lib/prismadb';
 
-export const authOptions: AuthOptions = {
+const handler = NextAuth ({
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID || '',
       clientSecret: process.env.GITHUB_SECRET || '',
     }),
+
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
     }),
-    Credentials({
+
+    CredentialsProvider({ 
       id: 'credentials',
+      type: 'credentials',
       name: 'Credentials',
       credentials: {
         email: {
@@ -29,7 +32,8 @@ export const authOptions: AuthOptions = {
           type: 'password'
         }
       },
-      async authorize(credentials) {
+      
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Email and password required');
         }
@@ -53,8 +57,9 @@ export const authOptions: AuthOptions = {
     })
   ],
   pages: {
-    signIn: '/auth'
+    signIn: '/login',
   },
+
   debug: process.env.NODE_ENV === 'development',
   
   session: { strategy: 'jwt' },
@@ -62,6 +67,6 @@ export const authOptions: AuthOptions = {
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },
   secret: process.env.NEXTAUTH_SECRET
-};
+});
 
-export default NextAuth(authOptions);
+export { handler as GET, handler as POST }

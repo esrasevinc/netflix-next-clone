@@ -4,7 +4,6 @@ import prismadb from '@/lib/prismadb'
 
 export async function POST(req: Request) {
   try {
-
     const res = await req.json();
     const { email, name, password } = res;
 
