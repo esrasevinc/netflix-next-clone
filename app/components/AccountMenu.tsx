@@ -17,8 +17,8 @@ const AccountMenu : React.FC<AccountMenuProps> = ({ visible }) => {
             <img className='w-8 rounded-md' src='/images/blue.png' alt=''/>
             <p className='text-white text-sm group-hover/item:underline'>Username</p>
         </div>
-        <hr className='bg-gray-600 border-0 h-px my-4'/>
-        <div  className='bg-gray-800 px-3 text-center text-white text-sm hover:underline'>Sign Out</div>
+        <hr className='bg-gray-800 border-0 h-px my-2'/>
+        <div  className='bg-gray-800 px-3 py-2 text-center text-white text-sm hover:underline'>Sign Out</div>
       </div>
     </div>
   )

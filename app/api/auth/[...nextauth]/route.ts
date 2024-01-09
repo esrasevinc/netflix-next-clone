@@ -1,11 +1,13 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import type { NextAuthOptions } from "next-auth"
 
 import { compare } from 'bcrypt';
 import prismadb from '@/lib/prismadb';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
-const handler = NextAuth ({
+export const authOptions: NextAuthOptions = {
+
   providers: [
  
     CredentialsProvider({ 
@@ -45,7 +47,7 @@ const handler = NextAuth ({
         return user;
       }
     })
-  ],
+  ], 
   pages: {
     signIn: '/login',
   },
@@ -58,6 +60,7 @@ const handler = NextAuth ({
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },
   secret: process.env.NEXTAUTH_SECRET
-});
+};
 
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST }
