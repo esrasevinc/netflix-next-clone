@@ -5,7 +5,6 @@ import Input from '../components/Input'
 import axios from 'axios';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { FcGoogle } from 'react-icons/fc'
 
 const Auth = () => {
 
@@ -27,9 +26,9 @@ const Auth = () => {
       email,
       password,
       redirect: false,
-      callbackUrl: '/'
+      callbackUrl:  '/'
       })
-      router.push('/')
+      
     }
     catch (error) {
       console.log(error)

@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import serverAuth from "@/lib/serverAuth";
 
 export async function GET() {

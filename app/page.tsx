@@ -11,7 +11,7 @@ export async function getProps() {
   if (!session) {
     return {
       redirect: {
-        destination: '/auth',
+        destination: '/login',
         permanent: false,
       }
     }
@@ -30,7 +30,10 @@ export default function Home() {
     <>
     <Navbar />
     <p className="text-white">Logged in as : {user?.name}</p>
-    <button className="h-10 w-full bg-white" onClick={() => signOut()}>Sign Out</button>
+    <div>
+    <button className="h-10 w-full bg-white" onClick={() => signOut()}>Sign Outtt</button>
+    </div>
+    
     </>
   )
 }
