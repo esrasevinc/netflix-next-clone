@@ -9,7 +9,7 @@ export async function GET() {
       status:200
   });
 
-  }  catch (error) {
+  } catch (error) {
     return Response.json({ error: `Something went wrong: ${error}` }, {
         status:500
     });

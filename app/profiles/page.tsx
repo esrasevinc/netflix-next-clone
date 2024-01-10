@@ -1,31 +1,33 @@
-import React from 'react'
-import axios from 'axios'
+'use client';
 
-export async function getProps() {
-    const session = await axios.get('/api/current')
-  
-    if (!session) {
-      return {
-        redirect: {
-          destination: '/login',
-          permanent: false,
-        }
-      }
-    }
-  
-    return {
-      props: {}
-    }
-  }
+import React from 'react'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import useCurrentUser from '../hooks/useCurrentUser'
+import Auth from '../login/page'
 
 const Profiles = () => {
 
+  const router = useRouter()
+  const { data: user } = useCurrentUser()
+
+  const AuthLogin = () => {
+    useEffect(() => {
+      if (!user) {
+        router.push("/login");
+      }
+    }, [user]);
+  
+    return <Auth />
+  }
+
   return (
-    <div>
+    <>
+      <AuthLogin />
       <p className='text-4xl text-white'>
         Profiles
       </p>
-    </div>
+    </>
   )
 }
 

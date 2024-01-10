@@ -18,7 +18,7 @@ const AccountMenu : React.FC<AccountMenuProps> = ({ visible }) => {
             <p className='text-white text-sm group-hover/item:underline'>Username</p>
         </div>
         <hr className='bg-gray-800 border-0 h-px my-2'/>
-        <div  className='bg-gray-800 px-3 py-2 text-center text-white text-sm hover:underline'>Sign Out</div>
+        <div className='bg-gray-800 px-3 py-2 text-center text-white text-sm hover:underline' onClick={() => signOut({ callbackUrl: 'http://localhost:3000/login' })}>Sign Out</div>
       </div>
     </div>
   )
