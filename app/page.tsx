@@ -6,12 +6,15 @@ import { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Auth from "./login/page";
 import Billboard from "./components/Billboard";
+import MovieList from "./components/MovieList";
+import useMovieList from "./hooks/useMovieList";
 
 export default function Home() {
 
   const router = useRouter()
   const pathName = usePathname()
   const { data: user } = useCurrentUser()
+  const { data: movies = [] } = useMovieList()
 
   useEffect(() => {
     router.push(pathName)
@@ -32,6 +35,9 @@ export default function Home() {
       <>
       <Navbar />
       <Billboard />
+      <div className="pb-40">
+        <MovieList title='Trending Now' data={movies}/>
+      </div>
       </>
       }
       </>
