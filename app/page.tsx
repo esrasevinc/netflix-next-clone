@@ -5,6 +5,7 @@ import useCurrentUser from "./hooks/useCurrentUser";
 import { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Auth from "./login/page";
+import Billboard from "./components/Billboard";
 
 export default function Home() {
 
@@ -28,7 +29,10 @@ export default function Home() {
       {!user ? 
       <AuthLogin /> 
       :
+      <>
       <Navbar />
+      <Billboard />
+      </>
       }
       </>
     )

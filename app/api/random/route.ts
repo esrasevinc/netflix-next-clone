@@ -1,7 +1,7 @@
 import prismadb from '@/lib/prismadb';
 import serverAuth from "@/lib/serverAuth";
 
-export default async function GET() {
+export async function GET() {
   try {
 
     await serverAuth();

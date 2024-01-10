@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 type NavbarItemProps = {
@@ -6,9 +7,9 @@ type NavbarItemProps = {
 
 const NavbarItem : React.FC<NavbarItemProps> = ({label}) => {
   return (
-    <div className='text-white cursor-pointer hover:text-gray-300 transition'>
+    <Link href='/' className='text-white cursor-pointer hover:text-gray-300 transition'>
       {label}
-    </div>
+    </Link>
   )
 }
 
