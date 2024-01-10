@@ -3,29 +3,33 @@
 import Navbar from "./components/Navbar";
 import useCurrentUser from "./hooks/useCurrentUser";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Auth from "./login/page";
 
 export default function Home() {
 
   const router = useRouter()
+  const pathName = usePathname()
   const { data: user } = useCurrentUser()
 
-  const AuthLogin = () => {
+  useEffect(() => {
+    router.push(pathName)
+  }, [user])
+
+  function AuthLogin() {
     useEffect(() => {
-      if (!user) {
-        router.push("/login");
-      }
-    }, [user]);
-  
+      router.push('/login')
+    }, [])
     return <Auth />
   }
   
-
     return (
       <>
-      <AuthLogin />
+      {!user ? 
+      <AuthLogin /> 
+      :
       <Navbar />
+      }
       </>
     )
     
