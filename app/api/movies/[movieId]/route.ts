@@ -1,10 +1,14 @@
+'use client';
+
 import prismadb from '@/lib/prismadb';
 import serverAuth from "@/lib/serverAuth";
+import { useParams } from 'next/navigation';
 
-export async function GET({ params }: { params: { slug: string } }) {
+export async function GET() {
     try {
         await serverAuth();
-        const movieId  = params.slug;
+        const params = useParams()
+        const movieId  = params.movieId;
 
         if (typeof movieId !== 'string') {
             throw new Error('Invalid ID')

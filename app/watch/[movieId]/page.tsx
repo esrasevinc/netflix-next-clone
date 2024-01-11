@@ -2,14 +2,16 @@
 
 import React from 'react'
 import useMovie from '@/app/hooks/useMovie'
-import { useSearchParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import { FaArrowLeft } from "react-icons/fa6";
 import { useRouter } from 'next/navigation';
 
-const Watch = ({ params }: { params: { slug: string } }) => {
-    const movieId = params.slug;
-    const { data } = useMovie(movieId as string);
+const Watch = () => {
+    const params = useParams()
+    
+    const { data } = useMovie(params.movieId as string);
     const router = useRouter()
+    
 
   return (
     <div className='h-screen w-screen bg-black'>
