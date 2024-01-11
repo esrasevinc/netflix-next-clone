@@ -3,7 +3,6 @@ import serverAuth from "@/lib/serverAuth";
 
 export async function GET() {
     try {
-  
       await serverAuth();
   
       const movies = await prismadb.movie.findMany();
