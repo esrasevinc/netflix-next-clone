@@ -1,33 +1,25 @@
 'use client';
 
 import React from 'react'
-import { usePathname, useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import useCurrentUser from '../hooks/useCurrentUser'
-import Auth from '../login/page'
+import { useRouter } from 'next/navigation'
+
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const Profiles = () => {
 
   const router = useRouter()
-  const pathName = usePathname()
-  const { data: user } = useCurrentUser()
 
-  useEffect(() => {
-    router.push(pathName)
-  }, [user])
-
-  function AuthLogin() {
-    useEffect(() => {
-      router.push('/login')
-    }, [])
-    return <Auth />
-  }
+  const { data : session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/login");
+    },
+  });
 
   return (
     <>
-    {!user ? 
-      <AuthLogin /> 
-     :
+    {session &&
     <div className='flex items-center h-full justify-center'>
       <div className='flex flex-col items-center'>
         <h1 className='text-3xl md:text-6xl text-center text-white'>Who is watching?</h1>
@@ -38,10 +30,9 @@ const Profiles = () => {
                 <img src='/images/blue.png' alt='Profile' />
               </div>
               <div className='mt-4 text-gray-400 text-2xl text-center group-hover:text-white'>
-                  {user?.name}
+                  {session?.user?.name}
               </div>
             </div>
-
           </div>
         </div>
       </div>

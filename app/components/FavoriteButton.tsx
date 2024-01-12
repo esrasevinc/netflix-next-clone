@@ -1,6 +1,6 @@
 'use client';
 
-import axios, { Axios } from "axios";
+import axios from "axios";
 import React, { useCallback, useMemo } from 'react'
 import useCurrentUser from "../hooks/useCurrentUser";
 import useFavorite from "../hooks/useFavorite";
